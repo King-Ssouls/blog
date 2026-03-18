@@ -61,7 +61,7 @@ class ProfileController extends Controller
     {
         $request->validate([
             'avatar' => 'image:jpeg,jpg,png|max:2048'
-        ]);hp artisan make:migration create_users_table
+        ]);
         $user = Auth::user();
 
         if ($request->hasFile('avatar')) {

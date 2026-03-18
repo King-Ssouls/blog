@@ -31,4 +31,10 @@ Route::middleware(['auth'])->group(function () {
 });
 
 
+ Route::prefix('comments')->name('comments.')->middleware(['role:admin'])->group(function () {
+            Route::get('/', [AdminCommentController::class, 'index'])->name('index');
+            Route::get('/{comment}', [AdminCommentController::class, 'show'])->name('show');
+            Route::delete('/{comment}', [AdminCommentController::class, 'destroy'])->name('destroy');
+ });
+
 require __DIR__.'/auth.php';

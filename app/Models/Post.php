@@ -21,8 +21,23 @@ class Post extends Model
     public function tags() {
         return $this->belongsToMany(Tag::class, 'post_tags');
     }
+    
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function comments(): HasMany
+    {
+        return $this->hasMany(Comment::class)
+                    ->with(['user', 'replies.user'])
+                    ->orderBy('created_at');
+    }
+
+    public function allComments(): HasMany
+    {
+        return $this->hasMany(Comment::class)
+                    ->with('user')
+                    ->orderBy('created_at');
     }
 }
